@@ -1,0 +1,46 @@
+//Solution to reversing the content in parenthesis and returning a string
+
+/*
+
+
+Task: 
+Your task is to reverse the strings contained in each pair of matching parentheses, 
+starting from the innermost pair. The results string should not contain any parentheses.
+
+Ideaology find the last left bracket in the sequence
+
+
+*/
+
+
+std::string reverseParentheses(std::string s) 
+{
+
+//Global Variables to signify the start and end of the spliced sequence
+int start,end;
+
+//Use a library function, find the last existing (
+start =s.find_last_of("(");
+
+//Main loop of the function, while a ( exists the function will repeat     
+while (s.length()>s.find_last_of("("))
+{
+	//Erase first parenthesis
+	s.erase(s.begin()+start);
+	
+	//Find last parenthesis of sequence
+	end=s.find_first_of(")",start);
+	
+	//Erase Last parenthesis
+	s.erase(s.begin()+end);
+	
+	//Reverse string segment
+	std::reverse(s.begin()+start,s.begin()+end) ;
+	
+	//Check for any more opening Parenthesis
+	start =s.find_last_of("(");
+}
+
+//Return statement    
+return s;
+}
